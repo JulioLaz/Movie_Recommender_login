@@ -1,0 +1,13 @@
+streamlit==1.33.0
+streamlit-navigation-bar==3.3.0
+selenium
+scikit-learn
+pytz
+hydralit-components
+Pillow
+requests
+webdriver-manager
+st-star-rating
+sqlalchemy
+psycopg2-binary
+st-supabase-connection==2.0.0
