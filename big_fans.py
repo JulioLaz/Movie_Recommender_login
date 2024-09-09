@@ -13,7 +13,8 @@ def big_fans():
     df_final=ddbb.df_final_original()
     movies = df_final.groupby('userId')['rating'].count().reset_index().sort_values(by='rating', ascending=False)
     user_rating_counts = dict(zip(movies.userId, movies.rating))
-    user_options = [f"Usuario {userId} - voted movies: {count}" for userId, count in user_rating_counts.items()]
+    user_options = [f"Usuario {userId}" for userId, count in user_rating_counts.items()]
+   #  user_options = [f"Usuario {userId} - voted movies: {count}" for userId, count in user_rating_counts.items()]
     col1,col2=st.columns(2)
     with col1:
         tg.giro('','Top picks for our biggest fans')
@@ -28,7 +29,7 @@ def big_fans():
 
         with col2:
             counter=movies[movies['userId']==selected_user_id]['rating'].values[0]
-            st.write('Voted movies:',int(counter))
+            st.write('Total movies rated by this user:',int(counter))
             user_movies = df_final[df_final['userId'] == selected_user_id]
             selected_movie_genres = user_movies['genre_set']
             all_genres = [genre for genre_set in selected_movie_genres for genre in genre_set]
