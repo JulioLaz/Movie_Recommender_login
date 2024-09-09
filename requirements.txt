@@ -11,3 +11,4 @@ st-star-rating
 sqlalchemy
 psycopg2-binary
 st-supabase-connection==2.0.0
+st_login_form
