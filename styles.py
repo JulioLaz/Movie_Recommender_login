@@ -67,7 +67,9 @@ display: none !important;
 /* marginin the check-box movie */
 #root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-gh2jqd.ea3mdgi5 > div > div > div > div:nth-child(11) > div:nth-child(2) > div > div > div > div > div{
 margin-bottom: 10px !important}
-
+/* login */
+#root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-gh2jqd.ea3mdgi5 > div > div > div > div.st-emotion-cache-0.eqpbllx5{
+margin-top:2rem}
 </style>
    '''
    st.markdown(element_style, unsafe_allow_html=True)   

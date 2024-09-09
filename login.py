@@ -2,7 +2,6 @@ import streamlit as st
 from supabase import create_client
 import pandas as pd
 from st_login_form import login_form
-import just_for_you
 user_id = None
 
 @st.cache_resource
@@ -36,19 +35,36 @@ def authenticate_user(username, password):
 def login():
     # st.title("Login / Register App")
 
-    client = login_form()
+    # client = login_form()
+    client = login_form(
+    title="Level up your experience!",
+    create_title="Sign Up",
+    login_title="Sign In",
+    create_username_label="Username",
+    create_password_label="Password",
+    login_username_label="Username",
+    login_password_label="Password",
+    create_submit_label="Sign Up",
+    login_submit_label="Sign In",
+    create_success_message="Account created successfully!",
+    login_success_message="Signed in successfully!",
+    login_error_message="Incorrect username or password",
+    allow_guest=False,  # Explicitly disable guest access
+    allow_create=True,
+    constrain_password=False  # Set to True if you want to enforce password constraints
+)
 
     if st.session_state.get("authenticated"):
         
         if st.session_state.get("username"):
             username = st.session_state.get("username")
             fetch_user_data(username)
-            just_for_you.just_for_you_section()
+            # just_for_you.just_for_you_section()
 
         else:
             st.success("Welcome guest")
             show_user_data(username)
-            just_for_you.just_for_you_section()
+            # just_for_you.just_for_you_section()
 
 
 
@@ -93,7 +109,7 @@ def fetch_user_data(username):
    st.session_state['user_id'] = user_id
    usuarioid=st.session_state.get("user_id")
    username=st.session_state.get("username")
-   st.success(f"Bienvenido {username}, tu id es: {usuarioid}")
+   st.success(f"Welcome {username}, your id: {usuarioid}. Start browsing and rating your favorite movies now!")
 #    st.title(usuarioid)
    return response.data
 

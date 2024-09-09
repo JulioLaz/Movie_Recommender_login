@@ -36,7 +36,7 @@ menu_data,over_theme,menu_id=menu.menu()
 
 if menu_id == "Home":
     tdz.title_poster('', 'Welcome to Movie Recommendations!')
-    img_home.create_movie_welcome_page()
+    img_home.create_movie_welcome_page(menu_id)
 
 elif menu_id == "Most Populars":
     most_populars.most_populars()

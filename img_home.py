@@ -1,4 +1,3 @@
-import text_desplazado as tdz
 import streamlit as st
 
 def create_movie_page():
@@ -45,7 +44,7 @@ def create_movie_page():
     st.markdown(html_content, unsafe_allow_html=True)
 
 
-def create_movie_welcome_page():
+def create_movie_welcome_page(menu_id):
     custom_css = """
     <style>
     .stApp {
@@ -60,19 +59,23 @@ def create_movie_welcome_page():
         height: 60vh;
     }
     .menu-explanation {
-        background-color: rgba(0, 0, 0, 0.6);
+        background-color: rgba(0, 0, 0, 0.8);
         color: white;
         padding: 20px;
         border-radius: 10px;
         margin-top: 20px;
     }
     .login-invitation {
-        background-color: rgba(255, 0, 0, 0.9);
+        background-color: rgba(255, 0, 0, 0.6);
         color: white;
         padding: 10px;
         border-radius: 5px;
         margin-top: 20px;
         text-align: center;
+    }
+    .text-invitation{
+    font-size:1.5rem;
+
     }
     </style>
     """
@@ -93,12 +96,11 @@ def create_movie_welcome_page():
             </ul>
         </div>
         <div class="login-invitation">
-            <p>Want to rate movies and get personalized recommendations? <a href="Login" style="color: #4CAF50;">Log in now!</a></p>
+            <p class="text-invitation">Want to rate movies and get personalized recommendations?</p>
+            <p class="text-invitation">Use the Login in the menu to get started!</p>
         </div>
     </div>
     """
-
-    # Render the HTML content
     st.markdown(html_content, unsafe_allow_html=True)
 
 # if __name__ == "__main__":
