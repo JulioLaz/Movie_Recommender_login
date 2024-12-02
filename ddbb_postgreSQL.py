@@ -19,5 +19,5 @@ def extraer_datos():
         return None
 
    
-# df_completo = extraer_datos()
-# print(df_completo)
+df_completo = extraer_datos()
+print(df_completo)

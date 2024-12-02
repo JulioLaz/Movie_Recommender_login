@@ -5,6 +5,7 @@ import streamlit as st
 def crear_conexion():
     df = pd.read_csv('user_ratings.csv', names=['userId', 'movieId', 'title', 'rating', 'timestamp'], header=0)
     DATABASE_URL = st.secrets["DATABASE_URL"]
+
     try:
         engine = create_engine(DATABASE_URL)
         with engine.connect() as connection:
@@ -134,7 +135,7 @@ def limpiar_ddbb_postgres():
 
 # obtener_nombres_y_estructuras_de_tablas()
 
-# crear_conexion()
+crear_conexion()
 # borrar_todas_las_tablas()
-borrar_todas_las_filas()
+# borrar_todas_las_filas()
 # obtener_nombres_de_tablas()
