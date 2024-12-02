@@ -1,6 +1,11 @@
+### BASE DE DATOS ESTA ALOJADA EN: railway ###
+
 from sqlalchemy import create_engine, text
 import pandas as pd
 import streamlit as st
+from sqlalchemy import create_engine, inspect 
+from sqlalchemy.exc import SQLAlchemyError
+from sqlalchemy.sql import text
 
 def crear_conexion():
     df = pd.read_csv('user_ratings.csv', names=['userId', 'movieId', 'title', 'rating', 'timestamp'], header=0)
@@ -102,9 +107,6 @@ def obtener_nombres_y_estructuras_de_tablas():
         print(f"Error al conectar o al obtener los nombres de las tablas: {str(e)}")
 
 
-from sqlalchemy import create_engine, text
-import streamlit as st
-
 def limpiar_ddbb_postgres():
     DATABASE_URL = st.secrets["DATABASE_URL"]
     engine = create_engine(DATABASE_URL)
@@ -129,13 +131,42 @@ def limpiar_ddbb_postgres():
     except Exception as e:
         print(f"Error while deleting duplicates: {str(e)}")
 
-# limpiar_ddbb_postgres()
 
 
+def obtener_nombres_estructuras_y_filas():
+    DATABASE_URL = st.secrets["DATABASE_URL"]
+    try:
+        engine = create_engine(DATABASE_URL)
+        inspector = inspect(engine)
 
-# obtener_nombres_y_estructuras_de_tablas()
+        # Obtener los nombres de todas las tablas en la base de datos
+        nombres_de_tablas = inspector.get_table_names()
 
-crear_conexion()
+        if nombres_de_tablas:
+            print("Tablas en la base de datos:")
+            for nombre in nombres_de_tablas:
+                print(f"\nTabla: {nombre}")
+                # Obtener la estructura de la tabla
+                columnas = inspector.get_columns(nombre)
+                for columna in columnas:
+                    print(f"Columna: {columna['name']}, Tipo: {columna['type']}")
+
+                # Obtener las primeras 10 filas de la tabla
+                with engine.connect() as connection:
+                    query = text(f"SELECT * FROM {nombre} LIMIT 10")
+                    result = connection.execute(query)
+                    filas = result.fetchall()
+                    for fila in filas:
+                        print(fila)
+        else:
+            print("No se encontraron tablas en la base de datos.")
+    
+    except SQLAlchemyError as e:
+        print(f"Error al conectar o al obtener los nombres de las tablas: {str(e)}")
+
+# crear_conexion()
 # borrar_todas_las_tablas()
 # borrar_todas_las_filas()
 # obtener_nombres_de_tablas()
+# obtener_nombres_y_estructuras_de_tablas()
+obtener_nombres_estructuras_y_filas()

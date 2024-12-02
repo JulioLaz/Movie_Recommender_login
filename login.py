@@ -6,9 +6,13 @@ user_id = None
 
 @st.cache_resource
 def init_connection():
-    url = st.secrets["SUPABASE_URL"]
-    key = st.secrets["SUPABASE_KEY"]
-    return create_client(url, key)
+    try:
+        url = st.secrets["SUPABASE_URL"]
+        key = st.secrets["SUPABASE_KEY"]
+        return create_client(url, key)
+    except Exception as e:
+        st.error(e.message)
+        return None
 
 supabase = init_connection()
 
